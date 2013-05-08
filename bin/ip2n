@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+var ip2n = require('../ipToNumber');
+
+var argv = process.argv.slice(2);
+
+if (!argv[0] || argv[0] === "-h" || argv[0] === "--help" || argv[0] === "-u" ) {
+	console.log("Converts IPv4 addresses to numbers");
+	console.log("Usage: " + process.argv[1] + " [-r] IP_ADDRESSES");
+	console.log("ip2n 10.0.0.1 192.168.100.1");
+	console.log("ip2n -r 167772161 3232261121");
+} else if (argv[0] === "-r") {
+	argv.shift();
+	argv.forEach(function(n) {
+		console.log(ip2n.fromNumber(+n));
+	});	
+} else {
+	argv.forEach(function(ip) {
+		console.log(ip2n.getNumber(ip));
+	});
+}
